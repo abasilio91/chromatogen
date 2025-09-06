@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import utils
 import images
-
 from threading import RLock
 
 _lock = RLock()
