@@ -49,4 +49,4 @@ if uploaded_file is not None:
                                     ymin=y_UV, 
                                     color='#882255')
 
-        st.pyplot(fig)
+        st.write(fig)
