@@ -20,6 +20,7 @@ if uploaded_file is not None:
     x_ConcB = list(dataframe["Conc B (ml)"])
     y_ConcB = list(dataframe["Conc B (%)"])
     x_Fraction = list(dataframe["Fraction (ml)"])
+
     if "Fraction (Fraction)" in dataframe.columns:
         y_Fraction = list(dataframe["Fraction (Fraction)"])
 

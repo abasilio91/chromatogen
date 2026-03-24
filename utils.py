@@ -22,5 +22,9 @@ def prepare_data(raw_data) -> pd.DataFrame:
   for item in num_cols:
     fix_type[item] = pd.to_numeric(fix_type[item])
 
+  if "Injection (ml)" in fix_type.columns:
+    injection_value = fix_type.iloc[0]["Injection (ml)"]
+    fix_type["Fraction (ml)"] = fix_type["Fraction (ml)"] - injection_value
+
   data = fix_type.copy()
   return data
