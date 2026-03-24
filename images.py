@@ -1,3 +1,57 @@
+import matplotlib.pyplot as plt
+from threading import RLock
+
+_lock = RLock()
+plt.rcParams['font.family'] = 'Arial'
+
+def plot_affinity(dataframe) -> plt.Figure:
+    x_UV = list(dataframe["UV 1_280 (ml)"])
+    y_UV = list(dataframe["UV 1_280 (mAU)"])
+    x_ConcB = list(dataframe["Conc B (ml)"])
+    y_ConcB = list(dataframe["Conc B (%)"])
+    x_Fraction = list(dataframe["Fraction (ml)"])
+
+    if "Fraction (Fraction)" in dataframe.columns:
+        y_Fraction = list(dataframe["Fraction (Fraction)"])
+
+    with _lock:
+        fig, ax = plt.subplots(figsize=(16, 8), dpi=300)
+        fig.patch.set_facecolor('none')
+
+        plot_first_xaxis_curve(ax, 
+                               xdata=x_UV, 
+                               ydata=y_UV, 
+                               xlabel='Volume (mL)', 
+                               ylabel='UV 280 nm (mAU)',
+                               color='#332288')
+        
+        if len(set(y_ConcB)) > 1:
+            plot_second_xaxis_curve(ax, 
+                                    xdata=x_ConcB, 
+                                    ydata=y_ConcB, 
+                                    ylabel='Buffer B Concentration (%)', 
+                                    color="#CC6677")
+            
+        if "Fraction (Fraction)" in dataframe.columns:
+            add_fraction_ticks(ax, 
+                               xdata=x_Fraction, 
+                               ydata=y_Fraction, 
+                               ymin=y_UV, 
+                               color='#882255')
+    return fig
+
+def plot_desalting(dataframe):
+    pass
+
+def plot_hydrophobic_interactions(dataframe):
+    pass
+
+def plot_gel_filtration_analytical(dataframe):
+    pass
+
+def plot_calibration_gel_filtration(dataframe):
+    pass
+
 def plot_first_xaxis_curve(ax, xdata, ydata, xlabel, ylabel, color):
     ax.plot(xdata, ydata, '-', color=color, label=ylabel)
     ax.set_ylabel(ylabel, color=color, fontweight='bold')

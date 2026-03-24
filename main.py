@@ -1,52 +1,43 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import validador
 import utils
 import images
-from threading import RLock
 
-_lock = RLock()
+st.write("# Visualização de dados de cromatografia")
+st.write("P.S.: não tá bonito, mas ta funcionando =P")
 
-plt.rcParams['font.family'] = 'Arial'
+option = st.radio(
+    "Escolha o tipo de gráfico que quer visualizar:",
+    ["Afinidade","Desalting","Interação hidrofóbica","gel filtração analítica","calibração - gel filtração"]
+)
 
-uploaded_file = st.file_uploader("Choose a file")
-if uploaded_file is not None:
+radio_image_fun = {
+    "Afinidade": images.plot_affinity,
+    "Desalting": images.plot_desalting,
+    "Interação hidrofóbica": images.plot_hydrophobic_interactions,
+    "gel filtração analítica": images.plot_gel_filtration_analytical,
+    "calibração - gel filtração": images.plot_calibration_gel_filtration
+}
 
-    # Can be used wherever a "file-like" object is accepted:
+uploaded_file = st.file_uploader("Faça upload de um arquivo CSV contendo os dados de cromatografia para visualizar os gráficos correspondentes.")
+
+try:
+    st.write("Processando o arquivo...")
     dataframe = utils.prepare_data(uploaded_file)
+
+    st.write("Validando o arquivo...")
+    msg = validador.validate_file(dataframe, option)
+    st.write(msg)
+
+    if msg != "arquivo valido":
+        st.stop()
+    
+    st.write("Exibindo os dados...")
     st.write(dataframe)
 
-    x_UV = list(dataframe["UV 1_280 (ml)"])
-    y_UV = list(dataframe["UV 1_280 (mAU)"])
-    x_ConcB = list(dataframe["Conc B (ml)"])
-    y_ConcB = list(dataframe["Conc B (%)"])
-    x_Fraction = list(dataframe["Fraction (ml)"])
-
-    if "Fraction (Fraction)" in dataframe.columns:
-        y_Fraction = list(dataframe["Fraction (Fraction)"])
-
-    with _lock:
-        fig, ax = plt.subplots(figsize=(16, 8), dpi=300)
-        fig.patch.set_facecolor('none')
-
-        images.plot_first_xaxis_curve(ax, 
-                                    xdata=x_UV, 
-                                    ydata=y_UV, 
-                                    xlabel='Volume (mL)', 
-                                    ylabel='UV 280 nm (mAU)',
-                                    color='#332288')
-        
-        if len(set(y_ConcB)) > 1:
-            images.plot_second_xaxis_curve(ax, 
-                                        xdata=x_ConcB, 
-                                        ydata=y_ConcB, 
-                                        ylabel='Buffer B Concentration (%)', 
-                                        color="#CC6677")
-            
-        if "Fraction (Fraction)" in dataframe.columns:
-            images.add_fraction_ticks(ax, 
-                                    xdata=x_Fraction, 
-                                    ydata=y_Fraction, 
-                                    ymin=y_UV, 
-                                    color='#882255')
-
-        st.write(fig)
+    st.write("Gerando o gráfico...")
+    fig = radio_image_fun[option](dataframe)
+    st.write(fig)
+except Exception as e:
+    st.error(f"Erro ao processar o arquivo: {e}")
+    st.stop()
