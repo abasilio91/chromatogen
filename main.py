@@ -8,11 +8,11 @@ st.write("P.S.: não tá bonito, mas ta funcionando =P")
 
 option = st.radio(
     "Escolha o tipo de gráfico que quer visualizar:",
-    ["Afinidade","Desalting","Interação hidrofóbica","gel filtração analítica","calibração - gel filtração"]
+    ["Afinidade ou troca iônica","Desalting","Interação hidrofóbica","gel filtração analítica","calibração - gel filtração"]
 )
 
 radio_image_fun = {
-    "Afinidade": images.plot_affinity,
+    "Afinidade ou troca iônica": images.plot_affinity,
     "Desalting": images.plot_desalting,
     "Interação hidrofóbica": images.plot_hydrophobic_interactions,
     "gel filtração analítica": images.plot_gel_filtration_analytical,

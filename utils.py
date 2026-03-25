@@ -16,11 +16,9 @@ def prepare_data(raw_data) -> pd.DataFrame:
   fix_columns.columns = column_names
   fix_type = fix_columns.drop([0]).reset_index(drop=True).copy()
 
-  num_cols = fix_type.columns.to_list()
-  del num_cols[5]
-
-  for item in num_cols:
-    fix_type[item] = pd.to_numeric(fix_type[item])
+  for item in fix_type.columns:
+    if not item == "Fraction (Fraction)":
+      fix_type[item] = pd.to_numeric(fix_type[item])
 
   if "Injection (ml)" in fix_type.columns:
     injection_value = fix_type.iloc[0]["Injection (ml)"]
