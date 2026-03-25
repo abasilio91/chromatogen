@@ -29,7 +29,7 @@ def plot_affinity(dataframe) -> plt.Figure:
             plot_second_xaxis_curve(ax, 
                                     xdata=x_ConcB, 
                                     ydata=y_ConcB, 
-                                    ylabel='Buffer B Concentration (%)', 
+                                    ylabel='Concentração B (%)', 
                                     color="#CC6677")
             
         if "Fraction (Fraction)" in dataframe.columns:
@@ -116,7 +116,7 @@ def plot_second_xaxis_curve(ax, xdata, ydata, ylabel, color):
     ax2.plot(xdata, ydata, '--', color=color, label=ylabel)
     ax2.set_ylabel(ylabel, color=color, fontweight='bold')
     ax2.tick_params('y', colors=color)
-    ax2.set_ylim(bottom=-5, top=105)
+    # ax2.set_ylim(bottom=-5, top=105)
     ax2.tick_params(axis='both', labelsize=16)
     ax2.set_ylabel(ax2.get_ylabel(), fontsize=18)
 
