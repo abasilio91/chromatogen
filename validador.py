@@ -5,20 +5,20 @@ def afinity(dataframe) -> str:
     return "arquivo valido"
 
 def desalting(dataframe) -> str:
-    if not "Cond (mS/ml)" in dataframe.columns:
-        msg = "O gráfico de desalting requer a coluna 'Cond (mS/ml)' no arquivo CSV."
+    if not "Cond (mS/cm)" in dataframe.columns:
+        msg = "O gráfico de desalting requer a coluna 'Cond (mS/cm)' no arquivo CSV."
         return msg
     return "arquivo valido"
 
 def hydrophobic_interaction(dataframe) -> str:
-    if not "Cond (mS/ml)" in dataframe.columns:
-        msg = "O gráfico de interação hidrofóbica requer a coluna 'Cond (mS/ml)' no arquivo CSV."
+    if not "Cond (mS/cm)" in dataframe.columns:
+        msg = "O gráfico de interação hidrofóbica requer a coluna 'Cond (mS/cm)' no arquivo CSV."
         return msg
     return "arquivo valido"
 
 def gel_filtration_analysis(dataframe) -> str:
-    if not "Cond (mS/ml)" in dataframe.columns:
-        msg = "O gráfico de filtração em gel requer a coluna 'Cond (mS/ml)' no arquivo CSV."
+    if not "Cond (mS/cm)" in dataframe.columns:
+        msg = "O gráfico de filtração em gel requer a coluna 'Cond (mS/cm)' no arquivo CSV."
         return msg
     return "arquivo valido"
 
