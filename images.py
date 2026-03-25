@@ -46,8 +46,6 @@ def plot_desalting(dataframe):
     x_cond = list(dataframe["Cond (ml)"])
     y_cond = list(dataframe["Cond (mS/cm)"])
     x_Fraction = list(dataframe["Fraction (ml)"])
-    x_injection = list(dataframe["Injection (ml)"])
-    y_injection = [0, 1]
 
     if "Fraction (Fraction)" in dataframe.columns:
         y_Fraction = list(dataframe["Fraction (Fraction)"])
@@ -76,12 +74,7 @@ def plot_desalting(dataframe):
                                ydata=y_Fraction, 
                                ymin=y_UV, 
                                color='#882255')
-        
-        add_injection_ticks(ax,
-                            xdata=x_injection, 
-                            ydata=y_injection, 
-                            ymin=y_UV, 
-                            color='#44AA99')
+
 
     return fig
 
