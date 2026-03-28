@@ -74,16 +74,79 @@ def plot_desalting(dataframe):
                                ydata=y_Fraction, 
                                ymin=y_UV, 
                                color='#882255')
-
-
     return fig
 
 def plot_hydrophobic_interactions(dataframe):
-    pass
+    x_UV = list(dataframe["UV 1_280 (ml)"])
+    y_UV = list(dataframe["UV 1_280 (mAU)"])
+    x_cond = list(dataframe["Condutividade (mL)"])
+    y_cond = list(dataframe["Condutividade (mS/cm)"])
+    x_Fraction = list(dataframe["Fraction (ml)"])
+
+    if "Fraction (Fraction)" in dataframe.columns:
+        y_Fraction = list(dataframe["Fraction (Fraction)"])
+
+    with _lock:
+        fig, ax = plt.subplots(figsize=(16, 8), dpi=300)
+        fig.patch.set_facecolor('none')
+
+        plot_first_xaxis_curve(ax, 
+                               xdata=x_UV, 
+                               ydata=y_UV, 
+                               xlabel='Volume (mL)', 
+                               ylabel='UV 280 nm (mAU)',
+                               color='#332288')
+        
+        if len(set(y_cond)) > 1:
+            plot_second_xaxis_curve(ax, 
+                                    xdata=x_cond, 
+                                    ydata=y_cond, 
+                                    ylabel='Condutividade (mS/cm)', 
+                                    color="#CC6677")
+            
+        if "Fraction (Fraction)" in dataframe.columns:
+            add_fraction_ticks(ax, 
+                               xdata=x_Fraction, 
+                               ydata=y_Fraction, 
+                               ymin=y_UV, 
+                               color='#882255')
+    return fig
 
 def plot_gel_filtration_analytical(dataframe):
-    pass
+    x_UV = list(dataframe["UV 1_280 (ml)"])
+    y_UV = list(dataframe["UV 1_280 (mAU)"])
+    x_cond = list(dataframe["Condutividade (min)"])
+    y_cond = list(dataframe["Condutividade (mS/cm)"])
+    x_Fraction = list(dataframe["Fraction (ml)"])
 
+    if "Fraction (Fraction)" in dataframe.columns:
+        y_Fraction = list(dataframe["Fraction (Fraction)"])
+
+    with _lock:
+        fig, ax = plt.subplots(figsize=(16, 8), dpi=300)
+        fig.patch.set_facecolor('none')
+
+        plot_first_xaxis_curve(ax, 
+                               xdata=x_UV, 
+                               ydata=y_UV, 
+                               xlabel='Volume (mL)', 
+                               ylabel='UV 280 nm (mAU)',
+                               color='#332288')
+        
+        if len(set(y_cond)) > 1:
+            plot_second_xaxis_curve(ax, 
+                                    xdata=x_cond, 
+                                    ydata=y_cond, 
+                                    ylabel='Condutividade (mS/cm)', 
+                                    color="#CC6677")
+            
+        if "Fraction (Fraction)" in dataframe.columns:
+            add_fraction_ticks(ax, 
+                               xdata=x_Fraction, 
+                               ydata=y_Fraction, 
+                               ymin=y_UV, 
+                               color='#882255')
+    return fig
 def plot_calibration_gel_filtration(dataframe):
     x_UV = list(dataframe["UV 1_280 (min)"])
     y_UV = list(dataframe["UV 1_280 (mAU)"])
@@ -98,7 +161,6 @@ def plot_calibration_gel_filtration(dataframe):
                                xlabel='Tempo (min)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
-            
     return fig
 
 def plot_first_xaxis_curve(ax, xdata, ydata, xlabel, ylabel, color):
@@ -116,7 +178,6 @@ def plot_second_xaxis_curve(ax, xdata, ydata, ylabel, color):
     ax2.plot(xdata, ydata, '--', color=color, label=ylabel)
     ax2.set_ylabel(ylabel, color=color, fontweight='bold')
     ax2.tick_params('y', colors=color)
-    # ax2.set_ylim(bottom=-5, top=105)
     ax2.tick_params(axis='both', labelsize=16)
     ax2.set_ylabel(ax2.get_ylabel(), fontsize=18)
 
