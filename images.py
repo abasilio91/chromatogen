@@ -9,9 +9,9 @@ def plot_affinity(dataframe) -> plt.Figure:
     y_UV = list(dataframe["UV 1_280 (mAU)"])
     x_ConcB = list(dataframe["Conc B (ml)"])
     y_ConcB = list(dataframe["Conc B (%)"])
-    x_Fraction = list(dataframe["Fraction (ml)"])
 
     if "Fraction (Fraction)" in dataframe.columns:
+        x_Fraction = list(dataframe["Fraction (ml)"])
         y_Fraction = list(dataframe["Fraction (Fraction)"])
 
     with _lock:
@@ -45,9 +45,9 @@ def plot_desalting(dataframe):
     y_UV = list(dataframe["UV 1_280 (mAU)"])
     x_cond = list(dataframe["Cond (ml)"])
     y_cond = list(dataframe["Cond (mS/cm)"])
-    x_Fraction = list(dataframe["Fraction (ml)"])
 
     if "Fraction (Fraction)" in dataframe.columns:
+        x_Fraction = list(dataframe["Fraction (ml)"])
         y_Fraction = list(dataframe["Fraction (Fraction)"])
 
     with _lock:
@@ -81,9 +81,9 @@ def plot_hydrophobic_interactions(dataframe):
     y_UV = list(dataframe["UV 1_280 (mAU)"])
     x_cond = list(dataframe["Cond (ml)"])
     y_cond = list(dataframe["Cond (mS/cm)"])
-    x_Fraction = list(dataframe["Fraction (ml)"])
 
     if "Fraction (Fraction)" in dataframe.columns:
+        x_Fraction = list(dataframe["Fraction (ml)"])
         y_Fraction = list(dataframe["Fraction (Fraction)"])
 
     with _lock:
