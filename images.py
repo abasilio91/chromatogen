@@ -93,7 +93,7 @@ def plot_hydrophobic_interactions(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (ml)', 
+                               xlabel='Volume (mL)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -129,7 +129,7 @@ def plot_gel_filtration_analytical(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (ml)', 
+                               xlabel='Volume (mL)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -158,7 +158,7 @@ def plot_calibration_gel_filtration(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Tempo (min)', 
+                               xlabel='Volume (mL)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
     return fig
