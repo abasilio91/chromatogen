@@ -20,7 +20,7 @@ def prepare_data(raw_data) -> pd.DataFrame:
     if not item == "Fraction (Fraction)":
       fix_type[item] = pd.to_numeric(fix_type[item])
 
-  if "Injection (ml)" in fix_type.columns:
+  if "Injection (ml)" in fix_type.columns and "Fraction (ml)" in fix_type.columns:
     injection_value = fix_type.iloc[0]["Injection (ml)"]
     fix_type["Fraction (ml)"] = fix_type["Fraction (ml)"] - injection_value
 

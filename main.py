@@ -38,6 +38,7 @@ try:
     st.write("Gerando o gráfico...")
     fig = radio_image_fun[option](dataframe)
     st.write(fig)
+    
 except Exception as e:
     st.error(f"Erro ao processar o arquivo: {e}")
     st.stop()

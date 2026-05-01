@@ -21,7 +21,7 @@ def plot_affinity(dataframe) -> plt.Figure:
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (mL)', 
+                               xlabel='Volume (ml)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -57,7 +57,7 @@ def plot_desalting(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (mL)', 
+                               xlabel='Volume (ml)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -79,8 +79,8 @@ def plot_desalting(dataframe):
 def plot_hydrophobic_interactions(dataframe):
     x_UV = list(dataframe["UV 1_280 (ml)"])
     y_UV = list(dataframe["UV 1_280 (mAU)"])
-    x_cond = list(dataframe["Condutividade (mL)"])
-    y_cond = list(dataframe["Condutividade (mS/cm)"])
+    x_cond = list(dataframe["Cond (ml)"])
+    y_cond = list(dataframe["Cond (mS/cm)"])
     x_Fraction = list(dataframe["Fraction (ml)"])
 
     if "Fraction (Fraction)" in dataframe.columns:
@@ -93,7 +93,7 @@ def plot_hydrophobic_interactions(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (mL)', 
+                               xlabel='Volume (ml)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -115,11 +115,11 @@ def plot_hydrophobic_interactions(dataframe):
 def plot_gel_filtration_analytical(dataframe):
     x_UV = list(dataframe["UV 1_280 (ml)"])
     y_UV = list(dataframe["UV 1_280 (mAU)"])
-    x_cond = list(dataframe["Condutividade (min)"])
-    y_cond = list(dataframe["Condutividade (mS/cm)"])
-    x_Fraction = list(dataframe["Fraction (ml)"])
+    x_cond = list(dataframe["Cond (ml)"])
+    y_cond = list(dataframe["Cond (mS/cm)"])
 
     if "Fraction (Fraction)" in dataframe.columns:
+        x_Fraction = list(dataframe["Fraction (ml)"])
         y_Fraction = list(dataframe["Fraction (Fraction)"])
 
     with _lock:
@@ -129,7 +129,7 @@ def plot_gel_filtration_analytical(dataframe):
         plot_first_xaxis_curve(ax, 
                                xdata=x_UV, 
                                ydata=y_UV, 
-                               xlabel='Volume (mL)', 
+                               xlabel='Volume (ml)', 
                                ylabel='UV 280 nm (mAU)',
                                color='#332288')
         
@@ -148,7 +148,7 @@ def plot_gel_filtration_analytical(dataframe):
                                color='#882255')
     return fig
 def plot_calibration_gel_filtration(dataframe):
-    x_UV = list(dataframe["UV 1_280 (min)"])
+    x_UV = list(dataframe["UV 1_280 (ml)"])
     y_UV = list(dataframe["UV 1_280 (mAU)"])
 
     with _lock:
